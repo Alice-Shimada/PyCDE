@@ -282,7 +282,7 @@ def _import_pysr() -> tuple[type[PySRRegressor], type[TemplateExpressionSpec]]:
     except OSError as exc:
         raise RuntimeError(
             "Failed to import PySR / Julia backend. "
-            "If you see a GLIBCXX mismatch in the SymReg environment on this machine, try: "
+            "If you see a GLIBCXX mismatch on Linux, a common workaround is: "
             "export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
         ) from exc
     return PySRRegressor, TemplateExpressionSpec

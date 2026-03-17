@@ -1,6 +1,10 @@
-# PySR Symbolic Regression Toolkit for d-log Integrals
+# PyCDE
 
-A small, reusable toolkit extracted from the 3l4p1m workflow in the paper source.
+PyCDE is a small, reusable toolkit for symbolic regression of canonical differential equations (CDEs) and d-log integral reconstruction with PySR.
+
+Repository:
+
+- https://github.com/Alice-Shimada/PyCDE
 
 It supports:
 
@@ -10,19 +14,30 @@ It supports:
 - a one-click bash pipeline,
 - switching between **log-only** and **log+sqrt** operator/nesting modes.
 
+## Related paper / citation appeal
+
+This repository is based on the workflow developed in the paper:
+
+- [arXiv:2510.10099 — *Uncovering Singularities in Feynman Integrals via Machine Learning*](https://arxiv.org/abs/2510.10099)
+
+If PyCDE is useful in your work, please cite the paper above.
+
 ## Repository layout
 
 ```text
-Release/
+PyCDE/
 ├── analyze_hall_of_fame.py
 ├── configs/
 │   └── 3l4p1m_multivar.json
+├── environment.yml
 ├── examples/
 │   ├── 3l4p1m_function.m
 │   └── 3l4p1m_function_modified_demo.m
 ├── generate_log_dataset.wl
 ├── pysr_experiment.py
+├── README.md
 ├── reproduce_3l4p1m.py
+├── requirements.txt
 ├── run_log_pipeline.sh
 └── source/
     ├── cord_1.txt
@@ -36,11 +51,11 @@ Release/
 Notes:
 
 - `source/regression.py` is the original paper-side reference script for the 3l4p1m example.
-- `source/*.txt` and `source/hall_of_fame.csv` are the minimal paper example data needed for the packaged demos here.
+- `source/*.txt` and `source/hall_of_fame.csv` are the minimal packaged example data used by the demos in this repository.
 
 ## Installation
 
-This release was tested against the following `SymReg` environment snapshot:
+This repository was tested against the following PyCDE environment snapshot:
 
 - Python `3.12.9`
 - PySR `1.5.9`
@@ -55,21 +70,19 @@ This release was tested against the following `SymReg` environment snapshot:
 ### Option A: create the conda environment directly (recommended)
 
 ```bash
-git clone <your-repo-url>
-cd Release
+git clone https://github.com/Alice-Shimada/PyCDE.git
+cd PyCDE
 conda env create -f environment.yml
-conda activate SymReg
+conda activate PyCDE
 ```
 
-This is the easiest route for clone-and-run usage.
-
-### Option B: create a conda env manually, then install with `requirements.txt`
+### Option B: create a conda environment manually, then install with `requirements.txt`
 
 ```bash
-git clone <your-repo-url>
-cd Release
-conda create -n SymReg python=3.12.9 pip -y
-conda activate SymReg
+git clone https://github.com/Alice-Shimada/PyCDE.git
+cd PyCDE
+conda create -n PyCDE python=3.12.9 pip -y
+conda activate PyCDE
 pip install -r requirements.txt
 ```
 
@@ -88,15 +101,15 @@ The one-click script `run_log_pipeline.sh` assumes a conda environment with PySR
 By default it tries:
 
 - `wolfram` from your `PATH`, otherwise `/usr/local/Wolfram/Mathematica/14.3/Executables/wolfram`
-- `conda info --base` to locate `conda.sh`, otherwise `~/Software/miniconda3/etc/profile.d/conda.sh`
-- environment name `SymReg`
+- `conda info --base` to locate `conda.sh`, otherwise a standard Miniconda-style fallback path
+- environment name `PyCDE`
 
 You can override these with environment variables:
 
 ```bash
 export WOLFRAM_BIN=/path/to/wolfram
 export CONDA_SH=/path/to/conda.sh
-export ENV_NAME=MySymRegEnv
+export ENV_NAME=PyCDE
 ```
 
 ### Quick smoke test after install
@@ -143,7 +156,7 @@ To enable it in the generator / pipeline, add:
 
 ### A. Reproduce the packaged paper example
 
-From this directory:
+From the repository root:
 
 ```bash
 python reproduce_3l4p1m.py --skip-fit
@@ -161,7 +174,7 @@ More serious run:
 python reproduce_3l4p1m.py --preset balanced
 ```
 
-If `bumper=True` causes a Julia-side backend error on your machine, rerun with:
+If `bumper=True` causes a Julia-side backend error on your setup, rerun with:
 
 ```bash
 python reproduce_3l4p1m.py --preset balanced --no-bumper
@@ -286,7 +299,7 @@ In that case, keep the paper-style template / operator constraints, but rerun wi
 
 ### 2) `GLIBCXX_3.4.30 not found`
 
-On some Linux machines, importing `pysr` / `juliacall` may fail with a `libstdc++` mismatch. A practical workaround is:
+On some Linux systems, importing `pysr` / `juliacall` may fail with a `libstdc++` mismatch. A practical workaround is:
 
 ```bash
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
@@ -295,15 +308,15 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 For example:
 
 ```bash
-conda activate SymReg
+conda activate PyCDE
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 python reproduce_3l4p1m.py --skip-fit
 ```
 
 ## Publishing note
 
-This folder is structured to be a clean GitHub repo. Before publishing publicly, you may still want to add:
+This repository is intentionally lightweight and focused on the runnable toolkit. Depending on your use case, you may still want to add:
 
 - a `LICENSE`
-- a short `CITATION` note referencing the paper
-- GitHub Actions / CI if you want automated checks
+- a dedicated `CITATION` file
+- CI checks or GitHub Actions

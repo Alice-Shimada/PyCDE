@@ -17,7 +17,7 @@ if [[ -z "${CONDA_SH:-}" ]]; then
     CONDA_SH="${HOME}/Software/miniconda3/etc/profile.d/conda.sh"
   fi
 fi
-ENV_NAME="${ENV_NAME:-SymReg}"
+ENV_NAME="${ENV_NAME:-PyCDE}"
 
 FUNCTION_FILE=""
 OUTPUT_ROOT="${SCRIPT_DIR}/pipeline_runs"
@@ -55,7 +55,7 @@ Pipeline options:
   --denominator-max N          Random rational denominators sampled from [1, N]
   --seed N                     Random seed for dataset generation
   --allow-sqrt                 Switch generator config to the paper's log+sqrt mode
-  --env-name NAME              Conda environment name (default: SymReg)
+  --env-name NAME              Conda environment name (default: PyCDE)
   --skip-fit                   Only generate dataset + generated_config.json
 
 Environment overrides:
