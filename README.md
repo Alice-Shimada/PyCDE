@@ -147,6 +147,7 @@ nested_constraints = {
     "log": {"log": 0}
 }
 ```
+all these configs correspond to PySR. See also [PySR Deep Wiki](https://deepwiki.com/MilesCranmer/PySR)
 
 ### 2) Optional: log+sqrt mode
 
@@ -210,7 +211,8 @@ This writes:
 
 ## C. Generate a new dataset from a Mathematica `.m` function
 
-Example input file:
+Attention that usually you should obtain dataset from your numerical IBP reduction for Canonical Differential Equations. However, we also provide you a minimal script to generate data for tests.
+Example input file `examples/3l4p1m_function.m`:
 
 ```mathematica
 <|
@@ -229,6 +231,8 @@ wolfram -noprompt -script generate_log_dataset.wl \
   --working-precision 60 \
   --min-precision 30
 ```
+
+You can also arrange your own candidate function in this format and call Mathematica to generate dataset for regression.
 
 Switch to log+sqrt mode if needed:
 
@@ -326,11 +330,3 @@ conda activate PyCDE
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 python reproduce_3l4p1m.py --skip-fit
 ```
-
-## Publishing note
-
-This repository is intentionally lightweight and focused on the runnable toolkit. Depending on your use case, you may still want to add:
-
-- a `LICENSE`
-- a dedicated `CITATION` file
-- CI checks or GitHub Actions
