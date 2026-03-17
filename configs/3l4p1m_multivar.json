@@ -1,0 +1,55 @@
+{
+  "run_name": "3l4p1m_multivar",
+  "data_dir": "../source",
+  "feature_columns": [
+    {"name": "x", "file": "cord_1.txt"},
+    {"name": "y", "file": "cord_2.txt"},
+    {"name": "dx", "file": "dinv_1.txt"},
+    {"name": "dy", "file": "dinv_2.txt"}
+  ],
+  "target": {
+    "mode": "feature",
+    "name": "x"
+  },
+  "template": {
+    "expressions": ["f"],
+    "variable_names": ["x", "y", "dx", "dy"],
+    "combine": "fdx = D(f, 1)(x, y)\nfdy = D(f, 2)(x, y)\nabs2(fdx - dx) + abs2(fdy - dy)"
+  },
+  "regressor_kwargs": {
+    "procs": 40,
+    "populations": 120,
+    "niterations": 500,
+    "variable_names": ["x", "y", "dx", "dy"],
+    "population_size": 120,
+    "binary_operators": ["+", "-", "*", "/"],
+    "unary_operators": ["log"],
+    "model_selection": "best",
+    "nested_constraints": {
+      "log": {
+        "log": 0
+      }
+    },
+    "complexity_of_constants": 5,
+    "elementwise_loss": "my_loss(predicted, target) = predicted",
+    "maxsize": 100,
+    "turbo": true,
+    "bumper": true,
+    "precision": 64
+  },
+  "analysis": {
+    "expression_variables": ["x", "y"],
+    "derivative_columns": [
+      {"variable": "x", "column": "dx"},
+      {"variable": "y", "column": "dy"}
+    ],
+    "exact_loss_threshold": 1e-20,
+    "max_abs_error_threshold": 1e-10,
+    "rmse_threshold": 1e-10,
+    "rational_tolerance": 1e-10
+  },
+  "notes": [
+    "Config version of the paper's source/regression.py example.",
+    "The fit target is a dummy column because the multi-variable template defines the real loss."
+  ]
+}

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.swp
+.DS_Store
+
+runs/
+outputs/
+pipeline_runs/
+
+*.tmp
+*.log

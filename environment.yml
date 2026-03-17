@@ -1,0 +1,15 @@
+name: SymReg
+channels:
+  - defaults
+dependencies:
+  - python=3.12.9
+  - pip=25.0
+  - pip:
+      - click==8.1.8
+      - juliacall==0.9.24
+      - numpy==2.2.4
+      - pandas==2.2.3
+      - pysr==1.5.9
+      - scikit-learn==1.6.1
+      - sympy==1.13.1
+      - typing-extensions==4.13.0
