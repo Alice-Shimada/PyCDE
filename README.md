@@ -20,7 +20,21 @@ This repository is based on the workflow developed in the paper:
 
 - [arXiv:2510.10099 — *Uncovering Singularities in Feynman Integrals via Machine Learning*](https://arxiv.org/abs/2510.10099)
 
-If PyCDE is useful in your work, please cite the paper above.
+If PyCDE is useful in your work, please cite the paper above:
+
+```tex
+@article{Liu:2025tje,
+    author = "Liu, Yuanche and Xu, Yingxuan and Zhang, Yang",
+    title = "{Uncovering Singularities in Feynman Integrals via Machine Learning}",
+    eprint = "2510.10099",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    reportNumber = "USTC-ICTS/PCFT-25-40, P3H-25-073, TTP25-034",
+    month = "10",
+    year = "2025"
+}
+```
+
 
 ## Repository layout
 
